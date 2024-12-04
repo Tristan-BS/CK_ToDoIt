@@ -1,2 +1,3 @@
 ﻿  CK_ToDoIt.cpp
+C:\APC\Eigene Programme\C++\CK_ToDoIt\CK_ToDoIt\CK_ToDoIt.cpp(309,1): warning C4715: "EditTask": Nicht alle Codepfade geben einen Wert zurück.
   CK_ToDoIt.vcxproj -> C:\APC\Eigene Programme\C++\CK_ToDoIt\x64\Debug\CK_ToDoIt.exe

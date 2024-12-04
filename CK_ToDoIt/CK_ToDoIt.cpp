@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <windows.h>
 
 using std::cout;
 using std::cerr;
@@ -41,10 +42,13 @@ struct Task {
 vector<Task> TaskList;
 
 bool CreateTask();
+bool EditTask();
+bool DeleteTask();
 
 string GetCurrentDate();
 string GetCurrentTimeStamp();
 
+void PrintTasksWithIndex();
 void PrintStatusHelp();
 void PrintPriorityHelp();
 void PrintCurrentTask();
@@ -71,13 +75,36 @@ int main() {
 		switch (Choice) {
 			case 1: {
 				if (CreateTask()) {
-                    cout << "Task created Successfully." << endl << endl;
+                    cout << "Task created Successfully..." << endl << endl;
+                    Sleep(1500);
                     PrintCurrentTask();
 				} else {
                     cout << "Something went wrong. Please try again." << endl << endl;
 				}
 				break;
 			}
+            case 2: {
+                if (TaskList.empty()) {
+                    cout << "No Tasks available." << endl << endl;
+                }
+                else {
+                    EditTask();
+                }
+            }
+            case 3: {
+                if (TaskList.empty()) {
+                    cout << "No Tasks available." << endl << endl;
+                }
+                else {
+                    if (DeleteTask()) {
+                        cout << "Task deleted Successfully..." << endl << endl;
+						Sleep(1500);
+                    }
+                    else {
+                        cout << "Something went wrong. Please try again." << endl << endl;
+                    }
+                }
+            }
             case 4: {
 				if (TaskList.empty()) {
 					cout << "No Tasks available." << endl << endl;
@@ -179,6 +206,141 @@ bool CreateTask() {
     }
 }
 
+bool EditTask() {
+    int TaskNumber, EditChoice;
+    string NewPriority, NewStatus;
+
+    try {
+
+        cout << "----------          EDIT TASK          ----------" << endl;
+        PrintTasksWithIndex();
+
+        cout << "Enter the number of the Task you want to edit: ";
+        cin >> TaskNumber;
+
+        while (true) {
+            if (TaskNumber < 0 || TaskNumber >= TaskList.size()) {
+                cerr << "Error: Task Number does not exist." << endl;
+                cout << "Enter the number of the Task you want to edit: ";
+                cin >> TaskNumber;
+            }
+            else {
+                break;
+            }
+        }
+
+        // Choose what to edit
+		cout << "Choose what to edit: " << endl;
+		cout << "1) Task Name" << endl;
+		cout << "2) Task Description" << endl;
+        cout << "3) Task Priority" << endl;
+		cout << "4) Task Status" << endl;
+		cout << "5) Return to Menu" << endl;
+
+		cout << "Your Input: ";
+		cin >> EditChoice;
+
+        switch (EditChoice) {
+            case 1: {
+				cout << "Enter new Task Name: ";
+				cin.ignore();
+				std::getline(cin, TaskList[TaskNumber].TaskName);
+
+				// TODO: Check if Task Name already exists
+				// TODO: Check if Task Name is empty
+				// TODO: Change Task Name in this Task
+
+				break;
+            }
+            case 2: {
+				cout << "Enter new Task Description: ";
+				cin.ignore();
+				std::getline(cin, TaskList[TaskNumber].TaskDescription);
+				break;
+            }
+            case 3: {
+				cout << "Enter new Task Priority: ";
+				cin >> NewPriority;
+                if (NewStatus == "H") {
+                    PrintStatusHelp();
+                    cout << "Enter Task Status: ";
+                    cin >> NewStatus;
+                }
+                else {
+                    while (true) {
+                        TaskList[TaskNumber].TaskPriority = std::stoi(NewPriority);
+                        if (TaskList[TaskNumber].TaskPriority < 1 || TaskList[TaskNumber].TaskPriority > 7) {
+                            cerr << "Error: Priority must be between 1 and 7. Enter Task Priority: ";
+                            cin >> NewPriority;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+            }
+            case 4: {
+				cout << "Enter H for Help" << endl;
+				cout << "Enter new Task Status: ";
+                cin >> NewStatus;
+                if (NewStatus == "H") {
+                    PrintStatusHelp();
+                    cout << "Enter Task Status: ";
+                    cin >> NewStatus;
+                }
+                else {
+                    while (true) {
+                        TaskList[TaskNumber].TaskStatus = std::stoi(NewStatus);
+                        if (TaskList[TaskNumber].TaskStatus < 1 || TaskList[TaskNumber].TaskStatus > 5) {
+                            cerr << "Error: Status must be between 1 and 5. Enter Task Status: ";
+                            cin >> NewStatus;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+            }
+            case 5: {
+                break;
+            }
+        }
+
+    }
+    catch (std::exception& e) {
+        cerr << "Error: " << e.what() << endl;
+        return false;
+    }
+}
+
+bool DeleteTask() {
+    int TaskNumber;
+
+    try {
+        PrintTasksWithIndex();
+
+		cout << "Enter the number of the Task you want to delete: ";
+		cin >> TaskNumber;
+        while (true) {
+            if (TaskNumber < 0 || TaskNumber >= TaskList.size()) {
+                cerr << "Error: Task Number does not exist." << endl;
+                cout << "Enter the number of the Task you want to delete: ";
+                cin >> TaskNumber;
+			}
+            else {
+                break;
+            }
+        }
+
+		TaskList.erase(TaskList.begin() + TaskNumber);
+		return true;
+
+    } catch (std::exception& e) {
+        cerr << "Error: " << e.what() << endl;
+        return false;
+    }
+}
+
 string GetCurrentDate() {
     time_t now = time(0);
     tm ltm;
@@ -223,6 +385,12 @@ string GetCurrentTimeStamp() {
         secondString = "0" + secondString;
     }
     return hourString + ":" + minuteString + ":" + secondString;
+}
+
+void PrintTasksWithIndex() {
+    for (int i = 0; i < TaskList.size(); i++) {
+        cout << "(" << i << ") " << TaskList[i].TaskName << endl;
+    }
 }
 
 void PrintStatusHelp() {
