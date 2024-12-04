@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\APC\\Eigene Programme\\C\u002B\u002B\\CK_ToDoIt\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CC1045B6-4FCB-4D50-8461-878A067C9A65}|CK_ToDoIt\\CK_ToDoIt.vcxproj|C:\\APC\\Eigene Programme\\C\u002B\u002B\\CK_ToDoIt\\CK_ToDoIt\\CK_ToDoIt.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CC1045B6-4FCB-4D50-8461-878A067C9A65}|CK_ToDoIt\\CK_ToDoIt.vcxproj|solutionrelative:CK_ToDoIt\\CK_ToDoIt.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CK_ToDoIt.cpp",
+              "DocumentMoniker": "C:\\APC\\Eigene Programme\\C\u002B\u002B\\CK_ToDoIt\\CK_ToDoIt\\CK_ToDoIt.cpp",
+              "RelativeDocumentMoniker": "CK_ToDoIt\\CK_ToDoIt.cpp",
+              "ToolTip": "C:\\APC\\Eigene Programme\\C\u002B\u002B\\CK_ToDoIt\\CK_ToDoIt\\CK_ToDoIt.cpp",
+              "RelativeToolTip": "CK_ToDoIt\\CK_ToDoIt.cpp",
+              "ViewState": "AgIAALAAAAAAAAAAAAAIwMsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-04T12:32:08.41Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
